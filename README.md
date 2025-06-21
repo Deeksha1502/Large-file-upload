@@ -20,7 +20,19 @@ The project consists of two main parts:
 1. **Frontend**: React application with Vite
 2. **Backend**: Express.js server
 
-large-file-upload/ ├── client/ # React frontend │ ├── src/ │ │ ├── components/ │ │ │ └── ChunkedFileUploader.jsx │ │ └── App.jsx │ └── package.json │ └── backend/ # Express backend ├── server.js ├── uploads/ # Completed file storage (auto-created) ├── chunks/ # Temporary chunk storage (auto-created) └── package.json
+large-file-upload/
+├── client/ # React frontend
+│ ├── package.json
+│ └── src/
+│ ├── App.jsx
+│ └── components/
+│ └── ChunkedFileUploader.jsx
+│
+├── backend/ # Express backend
+│ ├── package.json
+│ ├── server.js
+│ ├── uploads/ # Completed file storage (auto-created)
+│ └── chunks/ # Temporary chunk storage (auto-created)
 
 ## Getting Started
 
