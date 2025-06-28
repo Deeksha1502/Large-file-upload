@@ -344,21 +344,32 @@ const ChunkedFileUploader = () => {
 
                         {/* Chunk Progress Visualization */}
                         <div>
-                            <p className="text-sm text-gray-600 mb-2">Chunk Upload Status:</p>
-                            <div className="grid grid-cols-20 gap-1">
-                                {chunkProgress.map((status, index) => (
-                                    <div
-                                        key={index}
-                                        className={`h-4 rounded-sm ${getChunkStatusColor(status)}`}
-                                        title={`Chunk ${index}: ${status}`}
-                                    />
-                                ))}
-                            </div>
-                            <div className="flex justify-between text-xs text-gray-500 mt-1">
-                                <span>Chunk 0</span>
-                                <span>Chunk {uploadInfo.totalChunks - 1}</span>
-                            </div>
-                        </div>
+    <p className="text-sm text-gray-600 mb-2">Chunk Upload Status:</p>
+    <div className="flex h-40 overflow-y-auto">
+        {/* This will create columns of chunks */}
+        {Array.from({ length: Math.ceil(chunkProgress.length / 10) }).map((_, colIndex) => (
+            <div key={colIndex} className="flex flex-col space-y-1 mr-1">
+                {/* For each column, render chunks that belong to it */}
+                {chunkProgress
+                    .slice(colIndex * 10, (colIndex + 1) * 10)
+                    .map((status, rowIndex) => {
+                        const actualIndex = colIndex * 10 + rowIndex;
+                        return (
+                            <div
+                                key={actualIndex}
+                                className={`w-8 h-2 rounded-sm ${getChunkStatusColor(status)}`}
+                                title={`Chunk ${actualIndex}: ${status}`}
+                            />
+                        );
+                    })}
+            </div>
+        ))}
+    </div>
+    <div className="flex justify-between text-xs text-gray-500 mt-1">
+        <span>Chunk 0</span>
+        <span>Chunk {uploadInfo.totalChunks - 1}</span>
+    </div>
+</div>
                     </div>
                 )}
 
